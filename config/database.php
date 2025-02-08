@@ -84,7 +84,6 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'autorack.proxy.rlwy.net'),
             'port' => env('DB_PORT', '51779'),
             'database' => env('DB_DATABASE', 'railway'),
@@ -96,6 +95,7 @@ return [
             'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
+
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
