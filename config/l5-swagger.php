@@ -223,18 +223,11 @@ return [
                 */
             ],
             'security' => [
-                /*
-                 * Examples of Securities
-                 */
-                [
-                    /*
-                    'oauth2_security_example' => [
-                        'read',
-                        'write'
-                    ],
-
-                    'passport' => []
-                    */
+                'use_proxy' => true, // Asegúrate de que esto esté en true
+                'proxy' => [
+                    'host' => env('PROXY_HOST', ''),
+                    'port' => env('PROXY_PORT', ''),
+                    'scheme' => 'https', // Forzar uso de HTTPS
                 ],
             ],
         ],
@@ -318,7 +311,7 @@ return [
          * Constants which can be used in annotations
          */
         'constants' => [
-            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'https://backend-decameron-production.up.railway.app'),
         ],
     ],
 ];
