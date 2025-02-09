@@ -8,6 +8,7 @@ return [
                 'title' => 'L5 Swagger UI',
                 'doc_url' => env('APP_URL') . '/api/documentation',
                 'https' => true, // Agregar esta línea si no existe
+                'secure_assets' => true, // Añade esta línea
             ],
 
             'routes' => [
@@ -306,6 +307,7 @@ return [
                     'use_pkce_with_authorization_code_grant' => false,
                 ],
             ],
+            'asset_base_url' => 'https://backend-decameron-production.up.railway.app/docs/asset/', // Añade esta línea
         ],
         /*
          * Constants which can be used in annotations
