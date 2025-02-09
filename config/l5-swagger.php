@@ -50,6 +50,7 @@ return [
                     base_path('app'),
                     base_path('routes'),
                 ],
+                'base' => env('SWAGGER_BASE_PATH', 'https://backend-decameron-production.up.railway.app'), // Asegúrate de que no haya un valor incorrecto aquí
             ],
         ],
     ],
