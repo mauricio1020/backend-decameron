@@ -52,6 +52,7 @@ return [
                     base_path('routes'),
                 ],
                 'base' => env('SWAGGER_BASE_PATH', 'https://backend-decameron-production.up.railway.app'), // Asegúrate de que no haya un valor incorrecto aquí
+                'assets' => str_replace('http://', 'https://', env('L5_SWAGGER_BASE_PATH', '')) . '/docs/asset/',
             ],
         ],
     ],
@@ -99,6 +100,7 @@ return [
              */
            // 'base' => env('L5_SWAGGER_BASE_PATH', null),
             'base' => env('L5_SWAGGER_BASE_PATH', 'https://backend-decameron-production.up.railway.app'),
+            'assets' => str_replace('http://', 'https://', env('L5_SWAGGER_BASE_PATH', '')) . '/docs/asset/',
 
             /*
              * Absolute path to directories that should be excluded from scanning
