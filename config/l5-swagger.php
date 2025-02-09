@@ -6,6 +6,8 @@ return [
         'default' => [
             'api' => [
                 'title' => 'L5 Swagger UI',
+                'doc_url' => env('APP_URL') . '/api/documentation',
+                'https' => true, // Agregar esta línea si no existe
             ],
 
             'routes' => [
