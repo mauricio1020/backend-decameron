@@ -5,6 +5,11 @@
         "description": "API para gestionar hoteles, tipos de habitación y acomodaciones.",
         "version": "1.0"
     },
+    "servers": [
+        {
+            "url": "https://backend-decameron-production.up.railway.app"
+        }
+    ],
     "paths": {
         "/api/accommodations": {
             "get": {
@@ -612,5 +617,13 @@
             "name": "Tipos de Habitación",
             "description": "Tipos de Habitación"
         }
-    ]
+    ],
+    "security": {
+        "use_proxy": true,
+        "proxy": {
+            "host": "",
+            "port": "",
+            "scheme": "https"
+        }
+    }
 }
