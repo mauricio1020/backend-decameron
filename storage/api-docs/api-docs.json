@@ -1,0 +1,616 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Hoteles Decameron",
+        "description": "API para gestionar hoteles, tipos de habitación y acomodaciones.",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/accommodations": {
+            "get": {
+                "tags": [
+                    "Acomodaciones"
+                ],
+                "summary": "Obtener todas las acomodaciones",
+                "description": "Retorna una lista de todas las acomodaciones con sus relaciones (hotel y tipo de habitación).",
+                "operationId": "b334c4852bfbfbca991802e1e9ccce4c",
+                "responses": {
+                    "200": {
+                        "description": "Lista de acomodaciones obtenida exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Accommodation"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron acomodaciones"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Acomodaciones"
+                ],
+                "summary": "Crear una nueva acomodación",
+                "description": "Crea una nueva acomodación asociada a un hotel y tipo de habitación.",
+                "operationId": "e14fc50aa150f67951581f322d008ab3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "hotel_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "room_type_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Sencilla"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 10
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Acomodación creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accommodation"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            }
+        },
+        "/api/accommodations/{id}": {
+            "get": {
+                "tags": [
+                    "Acomodaciones"
+                ],
+                "summary": "Mostrar una acomodación específica",
+                "description": "Retorna los detalles de una acomodación específica por su ID.",
+                "operationId": "55273ef755378658b3a42304c8dc64db",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la acomodación",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles de la acomodación obtenidos exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accommodation"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Acomodación no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Acomodaciones"
+                ],
+                "summary": "Actualizar una acomodación",
+                "description": "Actualiza los datos de una acomodación existente.",
+                "operationId": "f8385454ae8a5eb33ca72a4dc61bcb9a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la acomodación",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "hotel_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "room_type_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Doble"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Acomodación actualizada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accommodation"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Acomodación no encontrada"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Acomodaciones"
+                ],
+                "summary": "Eliminar una acomodación",
+                "description": "Elimina una acomodación existente por su ID.",
+                "operationId": "bb178718927401cff2028d8e0e3dd8e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la acomodación",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Acomodación eliminada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Acomodación eliminada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Acomodación no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/hotels": {
+            "get": {
+                "tags": [
+                    "Hoteles"
+                ],
+                "summary": "Obtener lista de hoteles",
+                "description": "Retorna una lista de todos los hoteles registrados con sus acomodaciones y tipos de habitación.",
+                "operationId": "1f059609a9a7cdebad01e8494549cc8d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de hoteles obtenida exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Hotel"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron hoteles"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Hoteles"
+                ],
+                "summary": "Crear un nuevo hotel",
+                "description": "Crea un nuevo hotel con los datos proporcionados.",
+                "operationId": "c8f412836761802038a38f7c95ad6c9e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Hotel Decameron"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Calle 23 #58-25"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Cartagena"
+                                    },
+                                    "nit": {
+                                        "type": "string",
+                                        "example": "12345678-9"
+                                    },
+                                    "number_of_rooms": {
+                                        "type": "integer",
+                                        "example": 50
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Hotel creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hotel"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/hotels/{id}": {
+            "get": {
+                "tags": [
+                    "Hoteles"
+                ],
+                "summary": "Obtener un hotel específico",
+                "description": "Retorna los detalles de un hotel específico con sus acomodaciones y tipos de habitación.",
+                "operationId": "32fa458e73403c0f53352a6162667196",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del hotel",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel encontrado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hotel"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Hoteles"
+                ],
+                "summary": "Actualizar un hotel",
+                "description": "Actualiza los datos de un hotel existente.",
+                "operationId": "05f1700e0699e62ac666298252adb116",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del hotel",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Hotel Decameron Actualizado"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Calle 24 #59-26"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Barranquilla"
+                                    },
+                                    "nit": {
+                                        "type": "string",
+                                        "example": "87654321-0"
+                                    },
+                                    "number_of_rooms": {
+                                        "type": "integer",
+                                        "example": 60
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Hotel actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hotel"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Hoteles"
+                ],
+                "summary": "Eliminar un hotel",
+                "description": "Elimina un hotel existente.",
+                "operationId": "d7cc9d4ced4fee467530e2b4017bc6c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del hotel",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel eliminado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Hotel eliminado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/room-types": {
+            "get": {
+                "tags": [
+                    "Tipos de Habitación"
+                ],
+                "summary": "Obtener lista de tipos de habitación",
+                "description": "Retorna una lista de todos los tipos de habitación registrados.",
+                "operationId": "d688fcb7998e2add91986a9924200c0b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tipos de habitación obtenida exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RoomType"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron tipos de habitación"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Accommodation": {
+                "title": "Accommodation",
+                "description": "Modelo que representa una acomodación en un hotel.",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "hotel_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "room_type_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "Sencilla"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-10-01T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-10-01T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Hotel": {
+                "title": "Hotel",
+                "description": "Modelo que representa un hotel.",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Hotel Decameron"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "Calle 23 #58-25"
+                    },
+                    "city": {
+                        "type": "string",
+                        "example": "Cartagena"
+                    },
+                    "nit": {
+                        "type": "string",
+                        "example": "12345678-9"
+                    },
+                    "number_of_rooms": {
+                        "type": "integer",
+                        "example": 50
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-10-01T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-10-01T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "RoomType": {
+                "title": "RoomType",
+                "description": "Modelo que representa un tipo de habitación.",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Estándar"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-10-01T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-10-01T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Acomodaciones",
+            "description": "Acomodaciones"
+        },
+        {
+            "name": "Hoteles",
+            "description": "Hoteles"
+        },
+        {
+            "name": "Tipos de Habitación",
+            "description": "Tipos de Habitación"
+        }
+    ]
+}
